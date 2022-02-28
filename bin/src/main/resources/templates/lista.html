@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista pedidos</title>
+</head>
+<body>
+<div class="header">
+	<form th:action="@{/cerrarSesion}">
+		<input type="submit" value="Cerrar Sesion">
+	</form>
+</div>
+<h1 th:inline="text" >
+			Estos son tus pedidos
+	   		<span th:text="${nombre}"></span>
+		</h1>
+<table>
+
+    <tr>
+        <th id="ref"> Referencia </th>
+        <th id="product"> Productos </th>
+        <th id="date"> Fecha </th>
+        <th id="links"> Enlaces </th>
+    </tr>
+    
+    <tr th:each="pedido : ${listaPedidos}">
+        <td th:text="${pedido.referencia}"></td>
+        <td>
+        
+        	<ul th:each="producto : ${pedido.listaProductos}">
+        		<li th:inline="text" >
+			<span th:text="${producto.key.nombre}"></span> --
+	   		<span th:text="${producto.value}"></span>.ud
+	   		<span th:text="${resul}"></span></li>
+	   		
+        	</ul>
+        	
+        </td>
+        <td th:text="${pedido.fechaPedido}"></td>
+        
+        <td> <form th:action="@{/editarPedido}"> <input type="submit" id="pedido.referencia" value="Editar Pedido"></form></td>
+    </tr>
+</table>
+
+</body>
+</html>
